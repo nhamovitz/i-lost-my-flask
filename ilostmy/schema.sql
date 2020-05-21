@@ -11,11 +11,12 @@ CREATE TABLE item (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   -- author_id INTEGER NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  last_seen TEXT NOT NULL,
+  item_type TEXT NOT NULL,
+  email TEXT NOT NULL,
   title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  author TEXT NOT NULL,
+  body TEXT,
+  author TEXT,
+  last_seen_time TEXT,
   place TEXT
-
   -- FOREIGN KEY (author_id) REFERENCES user (id)
 );
