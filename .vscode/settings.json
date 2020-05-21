@@ -1,0 +1,6 @@
+{
+  "python.autoComplete.extraPaths": [
+    "./venv/Lib/site-packages/**"
+  ],
+  "python.linting.enabled": false,
+}
