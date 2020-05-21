@@ -3,4 +3,5 @@
 & "./venv/Scripts/Activate.ps1"
 $env:FLASK_APP = "i-lost-my"
 $env:FLASK_ENV = "development"
+flask init-db
 flask run
