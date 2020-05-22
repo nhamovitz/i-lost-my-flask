@@ -26,45 +26,55 @@ def index():
     return render_template('item_tracker/index.html', items=items)
 
 
-@bp.route('/create', methods=('GET', 'POST'))
-def create():
+def item_create():
+    item_type = request.form['item-type']
+    email = request.form['email']
+    title = request.form['title']
+    body = request.form['body']
+    author = request.form['author']
+    last_seen_time = request.form['last_seen_time']
+    place = request.form['place']
+    errors = []
+
+    if not title:
+        errors.append("Title is required.")
+    elif not item_type:
+        errors.append("Item type is required.")
+    elif not email:
+        errors.append("Email is required.")
+
+    if body == '':
+        body = None
+    if author == '':
+        author = None
+    if last_seen_time == '':
+        last_seen_time = None
+    if place == '':
+        place = None
+
+    if errors is not []:
+        flash(' '.join(errors))
+    else:
+        db = get_db()
+        db.execute(
+            'INSERT INTO post (created, item_type, email, title, body, author, last_seen_time)'
+            ' VALUES (?, ?, ?)',
+            (created, item_type, email, title, body, author, last_seen_time)
+        )
+        db.commit()
+        item_id = db.execute('SELECT last_insert_rowid()').fetchone()
+        return redirect(url_for('item_tracker.item', id=item_id))
+
+
+@bp.route('/create_lost_item', methods=('GET', 'POST'))
+def create_lost():
     if request.method == 'POST':
-        item_type = request.form['item-type']
-        email = request.form['email']
-        title = request.form['title']
-        body = request.form['body']
-        author = request.form['author']
-        last_seen_time = request.form['last_seen_time']
-        place = request.form['place']
-        errors = []
+        item_create()
+    return render_template('item_tracker/create_lost.html')
 
-        if not title:
-            errors.append("Title is required.")
-        elif not item_type:
-            errors.append("Item type is required.")
-        elif not email:
-            errors.append("Email is required.")
 
-        if body == '':
-            body = None
-        if author == '':
-            author = None
-        if last_seen_time == '':
-            last_seen_time = None
-        if place == '':
-            place = None
-
-        if errors is not []:
-            flash(' '.join(errors))
-        else:
-            db = get_db()
-            db.execute(
-                'INSERT INTO post (created, item_type, email, title, body, author, last_seen_time)'
-                ' VALUES (?, ?, ?)',
-                (created, item_type, email, title, body, author, last_seen_time)
-            )
-            db.commit()
-            # item_id = db.execute('SELECT last_insert_rowid()')
-            return redirect(url_for('item_tracker.index'))
-
-    return render_template('item_tracker/create.html')
+@bp.route('/create_found_item', methods=('GET', 'POST'))
+def create_found():
+    if request.method == 'POST':
+        item_create()
+    return render_template('item_tracker/create_found.html')
