@@ -1,29 +1,31 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}New Post{% endblock %}</h1>
+<h1>{% block title %}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <form method="post">
-  <label for="title">Title</label>
-  <input name="title" id="title" value="{{ request.form['title'] }}" required>
+  <input type="hidden" name="item_type" value={% block item_type %}{% endblock item_type %}">
+
+  <label for="item_name">What is the item?</label>
+  <input name="item_name" id="item_name" value="{{ request.form['item_name'] }}" required>
 
   <label for="author">Your name?</label>
-  <input name="author" id="author" value="{{ request.form['title'] }}">
+  <input name="author" id="author" value="{{ request.form['author'] }}">
 
   <label for="email">Your email</label>
   <input name="email" id="author" type="email" value="{{ request.form['email'] }}" required>
 
-  <label for="item-type">Lost or found?</label>
-  <select name="item-type" id="item-type" required>
-    <option value="">Select one</option>
-    <option value="lost">Lost</option>
-    <option value="found">Found</option>
-  </select>
+  <label for="sighting_time">{% block sighting_time_question %}{% endblock sighting_time_question %}</label>
+  <input name="sighting_time" id="sighting_time" type="date" value="{{ request.form['sighting_time'] }}"
+    {% block time_place_reqd %}{% endblock time_place_reqd %}>
 
-  <label for="body">Body</label>
-  <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
+  <label for="place">{% block place_question %}{% endblock place_question %}</label>
+  <input name="place" id="place" value="{{ request.form['place'] }}" {{ self.time_place_reqd }}>
+
+  <label for="info">Any other information?</label>
+  <textarea name="info" id="info">{{ request.form['info'] }}</textarea>
   <input type="submit" value="Save">
 </form>
 {% endblock %}
