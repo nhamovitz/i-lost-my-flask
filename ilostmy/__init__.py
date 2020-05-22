@@ -27,8 +27,8 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    from . import item_tracker as i_t
-    app.register_blueprint(i_t.bp)
+    from . import item_tracker
+    app.register_blueprint(item_tracker.bp)
     app.add_url_rule('/', endpoint='index')
 
     return app
