@@ -6,7 +6,7 @@
 
 {% block content %}
 <form method="post">
-  <input type="hidden" name="item_type" value={% block item_type %}{% endblock item_type %}">
+  <input type="hidden" name="item_type" value="{% block item_type %}{% endblock item_type %}">
 
   <label for="item_name">What is the item?</label>
   <input name="item_name" id="item_name" value="{{ request.form['item_name'] }}" required>
@@ -22,7 +22,7 @@
     {% block time_place_reqd %}{% endblock time_place_reqd %}>
 
   <label for="place">{% block place_question %}{% endblock place_question %}</label>
-  <input name="place" id="place" value="{{ request.form['place'] }}" {{ self.time_place_reqd }}>
+  <input name="place" id="place" value="{{ request.form['place'] }}" {{ self.time_place_reqd() }}>
 
   <label for="info">Any other information?</label>
   <textarea name="info" id="info">{{ request.form['info'] }}</textarea>
