@@ -27,6 +27,10 @@ def index():
 
 
 def item_create():
+    # from pprint import pp
+    # pp(request.form)
+    print(request.form)
+
     item_type = request.form['item_type']
     email = request.form['email']
     item_name = request.form['item_name']
@@ -62,7 +66,7 @@ def item_create():
             (created, item_type, email, item_name, info, author, sighting_time)
         )
         db.commit()
-        item_id = db.execute('SELECT last_insert_rowid()').fetchone()
+        item_id = db.execute('SELECT last_insert_rowid() FROM item').fetchone()
         return redirect(url_for('item_tracker.item', id=item_id))
 
 
