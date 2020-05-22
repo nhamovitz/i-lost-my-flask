@@ -2,7 +2,8 @@
 
 {% block header %}
 <h1>{% block title %}Outstanding items{% endblock %}</h1>
-<a class="action" href="{{ url_for('item_tracker.create') }}">New</a>
+<a class="action" href="{{ url_for('item_tracker.create_lost') }}">Report lost item</a>
+<a class="action" href="{{ url_for('item_tracker.create_found') }}">Report found item</a>
 {% endblock %}
 
 {% block content %}
