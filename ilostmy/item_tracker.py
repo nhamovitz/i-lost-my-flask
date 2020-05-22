@@ -12,9 +12,7 @@ bp = Blueprint('item_tracker', __name__)
 def index():
     db = get_db()
     items = db.execute(
-        'SELECT *'
-        'FROM item'
-        ' ORDER BY created DESC'
+        'SELECT * FROM item ORDER BY created DESC'
         # ' ORDER BY item_type DESC'
     ).fetchall()
     # # if bp.debug:
@@ -29,7 +27,7 @@ def index():
 def item_create():
     # from pprint import pp
     # pp(request.form)
-    print(request.form)
+    # print(request.form)
 
     item_type = request.form['item_type']
     email = request.form['email']
@@ -56,34 +54,38 @@ def item_create():
     if place == '':
         place = None
 
-    if errors is not []:
+    if errors != []:
         flash(' '.join(errors))
     else:
         db = get_db()
-        db.execute(
-            'INSERT INTO item (created, item_type, email, item_name, info, author, sighting_time)'
-            ' VALUES (?, ?, ?, ?, ?, ?, ?)',
-            (created, item_type, email, item_name, info, author, sighting_time)
-        )
+        item_id = db.execute(
+            'INSERT INTO item (item_type, email, item_name, info, author, sighting_time, place) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            (item_type, email, item_name, info, author, sighting_time, place)
+        ).lastrowid
         db.commit()
-        item_id = db.execute('SELECT last_insert_rowid() FROM item').fetchone()
-        return redirect(url_for('item_tracker.item', id=item_id))
+        # print(f"item_id: {item_id}")
+        return redirect(url_for('item_tracker.item', item_id=item_id))
 
 
 @bp.route('/create_lost_item', methods=('GET', 'POST'))
 def create_lost():
     if request.method == 'POST':
-        item_create()
+        return item_create()
     return render_template('item_tracker/create_lost.html')
 
 
 @bp.route('/create_found_item', methods=('GET', 'POST'))
 def create_found():
     if request.method == 'POST':
-        item_create()
+        return item_create()
     return render_template('item_tracker/create_found.html')
 
 
-@bp.route('/item/<id>')
-def display_item():
-    pass
+@bp.route('/item/<int:item_id>')
+def item(item_id):
+    item = get_db().execute(
+        'SELECT * FROM item WHERE id=?',
+        (item_id,)
+    ).fetchone()
+
+    return render_template('item_tracker/item.html', item=item)
