@@ -19,15 +19,15 @@
         {% endif %} on {{ item['created'].strftime('%Y-%m-%d') }}</div>
     </div>
   </header>
-  <p class="body">
+  <p class="info">
   <p class="item-type">Item type: {{ item['item_type'] }}</p>
   <p class="item-info">
     {% if item['item_type'] == "lost" %}Last seen{% elif item['item_type'] == "found" %}Found{% endif %}
-    {% if item['last_seen_time'] %} on {{ item['last_seen_time'] }}{% endif %}
+    {% if item['sighting_time'] %} on {{ item['sighting_time'] }}{% endif %}
     {% if item['place'] %} at {{ item['place'] }}{% endif %}.
   </p>
-  {% if item['body'] %}
-  {{ item['body'] }}
+  {% if item['info'] %}
+  {{ item['info'] }}
   {% endif %}</p>
 </article>
 {% if not loop.last %}

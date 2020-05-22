@@ -27,28 +27,28 @@ def index():
 
 
 def item_create():
-    item_type = request.form['item-type']
+    item_type = request.form['item_type']
     email = request.form['email']
-    title = request.form['title']
-    body = request.form['body']
+    item_name = request.form['item_name']
+    info = request.form['info']
     author = request.form['author']
-    last_seen_time = request.form['last_seen_time']
+    sighting_time = request.form['sighting_time']
     place = request.form['place']
     errors = []
 
-    if not title:
-        errors.append("Title is required.")
+    if not item_name:
+        errors.append("Item is required.")
     elif not item_type:
         errors.append("Item type is required.")
     elif not email:
         errors.append("Email is required.")
 
-    if body == '':
-        body = None
+    if info == '':
+        info = None
     if author == '':
         author = None
-    if last_seen_time == '':
-        last_seen_time = None
+    if sighting_time == '':
+        sighting_time = None
     if place == '':
         place = None
 
@@ -57,9 +57,9 @@ def item_create():
     else:
         db = get_db()
         db.execute(
-            'INSERT INTO post (created, item_type, email, title, body, author, last_seen_time)'
-            ' VALUES (?, ?, ?)',
-            (created, item_type, email, title, body, author, last_seen_time)
+            'INSERT INTO item (created, item_type, email, item_name, info, author, sighting_time)'
+            ' VALUES (?, ?, ?, ?, ?, ?, ?)',
+            (created, item_type, email, item_name, info, author, sighting_time)
         )
         db.commit()
         item_id = db.execute('SELECT last_insert_rowid()').fetchone()
@@ -78,3 +78,8 @@ def create_found():
     if request.method == 'POST':
         item_create()
     return render_template('item_tracker/create_found.html')
+
+
+@bp.route('/item/<id>')
+def display_item():
+    pass

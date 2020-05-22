@@ -13,10 +13,10 @@ CREATE TABLE item (
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   item_type TEXT NOT NULL,
   email TEXT NOT NULL,
-  title TEXT NOT NULL,
-  body TEXT,
+  item_name TEXT NOT NULL,
+  info TEXT,
   author TEXT,
-  last_seen_time TEXT,
+  sighting_time TEXT,
   place TEXT
   -- FOREIGN KEY (author_id) REFERENCES user (id)
 );
