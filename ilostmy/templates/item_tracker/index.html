@@ -16,7 +16,7 @@
           {{ item['item_name'] }}
         </a>
       </h1>
-      <div class="about">by
+      <div class="about">submitted by
         {% if item['author'] %}
         {{ item['author'] }} ({{ item['email'] }})
         {% else %}
@@ -32,9 +32,6 @@
     {% if item['sighting_time'] %} on {{ item['sighting_time'] }}{% endif %}
     {% if item['place'] %} at {{ item['place'] }}{% endif %}.
   </p>
-  {% if item['info'] %}
-  {{ item['info'] }}
-  {% endif %}</p>
 </article>
 {% if not loop.last %}
 <hr>

@@ -1,1 +1,33 @@
 {% extends 'base.html' %}
+
+{% block title %}{{ item['item_name'] }} - {% if item['item_type'] == "lost" %}Lost
+item{% elif item['item_type'] == "found" %}Found item{% endif %}{% endblock title %}
+
+{% block content %}
+<article class="item">
+  <header>
+    <div>
+      <h1>
+        {{ item['item_name'] }}
+      </h1>
+      <div class="about">submitted by
+        {% if item['author'] %}
+        {{ item['author'] }} ({{ item['email'] }})
+        {% else %}
+        {{ item['email'] }}
+        {% endif %} on {{ item['created'].strftime('%m/%d/%y') }}
+      </div>
+    </div>
+  </header>
+  <p class="info">
+  <p class="item-type">Item type: {{ item['item_type'] }}</p>
+  <p class="item-info">
+    {% if item['item_type'] == "lost" %}Last seen{% elif item['item_type'] == "found" %}Found{% endif %}
+    {% if item['sighting_time'] %} on {{ item['sighting_time'] }}{% endif %}
+    {% if item['place'] %} at {{ item['place'] }}{% endif %}.
+  </p>
+  {% if item['info'] %}
+  {{ item['info'] }}
+  {% endif %}</p>
+</article>
+{% endblock content %}
