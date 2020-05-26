@@ -1,4 +1,4 @@
-**[click here for project log](https://docs.google.com/document/d/15nM9X0eWFdvy0PJBg230Rwo3XFstrA24aJVE9tW1lio/edit#)
+**[click here for project log](https://docs.google.com/document/d/15nM9X0eWFdvy0PJBg230Rwo3XFstrA24aJVE9tW1lio/edit#)**
 
 ## TODO
 - validation (ideally both client- and server- side) that the date given isn't in the future (or too far in the past?)
