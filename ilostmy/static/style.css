@@ -79,8 +79,8 @@ header .action {
 }
 
 .item>header {
-  display    : flex;
-  align-items: flex-end;
+  display    : grid;
+  align-items: baseline;
   font-size  : 0.85em;
 }
 
