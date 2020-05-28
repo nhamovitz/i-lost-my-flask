@@ -17,7 +17,7 @@ CREATE TABLE item (
   resolved BOOLEAN NOT NULL,
   info TEXT,
   author TEXT,
-  sighting_time TEXT,
+  sighting_time TEXT, -- TODO: should possibly be type `TIMESTAMP`?
   place TEXT
   -- FOREIGN KEY (author_id) REFERENCES user (id)
 );

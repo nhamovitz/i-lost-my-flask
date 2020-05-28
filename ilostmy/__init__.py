@@ -2,10 +2,18 @@ import os
 
 from flask import Flask
 
+from datetime import date
+
+
+def pprint_iso_date(datestring):
+    return date.fromisoformat(datestring).strftime('%m/%d/%y')
+
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    # credit to https://stackoverflow.com/a/7226047/9221660
+    app.jinja_env.globals.update(pprint_iso_date=pprint_iso_date)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'ilostmy.sqlite'),
