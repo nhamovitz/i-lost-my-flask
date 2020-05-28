@@ -10,20 +10,24 @@ from ilostmy.util import pprint_iso_date
 bp = Blueprint('item_tracker', __name__)
 
 
-@bp.route('/')
-def index():
+def list_items(page_name, resolved):
     db = get_db()
     items = db.execute(
-        'SELECT * FROM item WHERE resolved = 0 ORDER BY created DESC'
-        # ' ORDER BY item_type DESC'
+        'SELECT * FROM item WHERE resolved = ? ORDER BY created DESC',
+        (int(resolved),)
     ).fetchall()
-    # # if bp.debug:
-    # from pprint import pprint as pp
-    # print(type(items))
-    # print(type(items[0]))
-    # pp(items[0])
 
-    return render_template('item_tracker/index.html', items=items)
+    return render_template('item_tracker/list_items.html', items=items, page_name=page_name)
+
+
+@bp.route('/')
+def index():
+    return list_items("Outstanding items", False)
+
+
+@bp.route('/resolved')
+def resolved():
+    return list_items("Previously resolved items", True)
 
 
 def item_create():
