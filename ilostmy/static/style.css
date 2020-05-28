@@ -98,10 +98,6 @@ header .action {
   font-style: italic;
 }
 
-.item .info {
-  white-space: pre-line;
-}
-
 .content:last-child {
   margin-bottom: 0;
 }

@@ -2,8 +2,6 @@
 
 {% block header %}
 <h1>{% block title %}Outstanding items{% endblock %}</h1>
-<a class="action" href="{{ url_for('item_tracker.create_lost') }}">Report lost item</a>
-<a class="action" href="{{ url_for('item_tracker.create_found') }}">Report found item</a>
 {% endblock %}
 
 {% block content %}
@@ -25,13 +23,14 @@
       </div>
     </div>
   </header>
-  <p class="info">
-  <p class="item-type">Item type: {{ item['item_type'] }}</p>
-  <p class="item-info">
-    {% if item['item_type'] == "lost" %}Last seen{% elif item['item_type'] == "found" %}Found{% endif %}
-    {% if item['sighting_time'] %} on {{ item['sighting_time'] }}{% endif %}
-    {% if item['place'] %} at {{ item['place'] }}{% endif %}.
-  </p>
+  <div class="info">
+    <p class="item-type">Item type: {{ item['item_type'] }}</p>
+    <p class="item-info">
+      {% if item['item_type'] == "lost" %}Last seen{% elif item['item_type'] == "found" %}Found{% endif %}
+      {% if item['sighting_time'] %} on {{ item['sighting_time'] }}{% endif %}
+      {% if item['place'] %} at {{ item['place'] }}{% endif %}.
+    </p>
+  </div>
 </article>
 {% if not loop.last %}
 <hr>

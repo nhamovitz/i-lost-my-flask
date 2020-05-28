@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ item['item_name'] }} - {% if item['item_type'] == "lost" %}Lost
-item{% elif item['item_type'] == "found" %}Found item{% endif %}{% endblock title %}
+{% block title %}{{ item['item_name'] }} ({% if item['item_type'] == "lost" %}lost
+item{% elif item['item_type'] == "found" %}found item{% endif %}){% endblock title %}
 
 {% block content %}
 <article class="item">
@@ -19,15 +19,16 @@ item{% elif item['item_type'] == "found" %}Found item{% endif %}{% endblock titl
       </div>
     </div>
   </header>
-  <p class="info">
-  <p class="item-type">Item type: {{ item['item_type'] }}</p>
-  <p class="item-info">
-    {% if item['item_type'] == "lost" %}Last seen{% elif item['item_type'] == "found" %}Found{% endif %}
-    {% if item['sighting_time'] %} on {{ item['sighting_time'] }}{% endif %}
-    {% if item['place'] %} at {{ item['place'] }}{% endif %}.
-  </p>
-  {% if item['info'] %}
-  {{ item['info'] }}
-  {% endif %}</p>
+  <div class="info">
+    <p class="item-type">Item type: {{ item['item_type'] }}</p>
+    <p class="item-info">
+      {% if item['item_type'] == "lost" %}Last seen{% elif item['item_type'] == "found" %}Found{% endif %}
+      {% if item['sighting_time'] %} on {{ item['sighting_time'] }}{% endif %}
+      {% if item['place'] %} at {{ item['place'] }}{% endif %}.
+    </p>
+    {% if item['info'] %}
+    {{ item['info'] }}
+    {% endif %}</p>
+  </div>
 </article>
 {% endblock content %}
