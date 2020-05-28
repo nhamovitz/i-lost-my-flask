@@ -14,7 +14,7 @@ bp = Blueprint('item_tracker', __name__)
 def index():
     db = get_db()
     items = db.execute(
-        'SELECT * FROM item ORDER BY created DESC'
+        'SELECT * FROM item WHERE resolved = 0 ORDER BY created DESC'
         # ' ORDER BY item_type DESC'
     ).fetchall()
     # # if bp.debug:
@@ -96,3 +96,14 @@ def item(item_id):
     ).fetchone()
 
     return render_template('item_tracker/item.html', item=item)
+
+
+@bp.route('/item/<int:item_id>/resolve', methods=('POST',))
+def resolve(item_id):
+    db = get_db()
+    db.execute(
+        'UPDATE item SET resolved = ? WHERE id = ?',
+        (1, item_id)
+    )
+    db.commit()
+    return redirect(url_for('item_tracker.index'))
