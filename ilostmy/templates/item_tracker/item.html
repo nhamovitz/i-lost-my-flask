@@ -6,7 +6,6 @@ item{% elif item['item_type'] == "found" %}found item{% endif %}){% endblock tit
 {% block content %}
 <article class="item">
   <header>
-    <!-- <div> -->
     <h1>
       {{ item['item_name'] }}
     </h1>
@@ -17,7 +16,6 @@ item{% elif item['item_type'] == "found" %}found item{% endif %}){% endblock tit
       {{ item['email'] }}
       {% endif %} on {{ item['created'].strftime('%m/%d/%y') }}
     </div>
-    <!-- </div> -->
   </header>
   <div class="info">
     <p class="item-type">Item type: {{ item['item_type'] }}</p>
