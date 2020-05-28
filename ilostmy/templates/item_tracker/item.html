@@ -12,11 +12,11 @@ item{% elif item['item_type'] == "found" %}found item{% endif %}){% endblock tit
     <div class="about">submitted by
       <a href="mailto:{{ item['email'] }}">
         {% if item['author'] %}
-        {{ item['author'] }} ({{ item['email'] }})
-        {% else %}
-        {{ item['email'] }}
-      </a>
-      {% endif %} on {{ item['created'].strftime('%m/%d/%y') }}
+        {{ item['author'] }} ({{ item['email'] }}){% else %}
+        <!-- this lack of a linebreak is important for formatting -->
+        {{ item['email'].strip() }}
+        {% endif %}</a> <!-- so's this one -->
+      on {{ item['created'].strftime('%m/%d/%y') }}
     </div>
   </header>
   <div class="info">
