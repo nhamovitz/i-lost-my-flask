@@ -110,4 +110,4 @@ def resolve(item_id):
         (1, item_id)
     )
     db.commit()
-    return redirect(url_for('item_tracker.index'))
+    return redirect(url_for('item_tracker.item', item_id=item_id))

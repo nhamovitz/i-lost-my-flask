@@ -85,6 +85,10 @@ header .action {
   border    : 1px solid #377ba8;
 }
 
+.item #freeform-info {
+  white-space: pre-wrap;
+}
+
 .item>header {
   display    : grid;
   align-items: baseline;
@@ -120,14 +124,19 @@ header .action {
   margin-bottom: 0.5em;
 }
 
-.content input,
+.content input:not([type=submit]),
 .content textarea {
   margin-bottom: 1em;
 }
 
 .content textarea {
-  min-height: 12em;
-  resize    : vertical;
+  min-height : 12em;
+  resize     : vertical;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.content input {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input.danger {

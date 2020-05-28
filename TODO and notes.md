@@ -6,7 +6,11 @@
 
 - [modals for an item view instead of a separate `/item/<int:id>` route](https://docs.google.com/document/d/15nM9X0eWFdvy0PJBg230Rwo3XFstrA24aJVE9tW1lio/edit#heading=h.go2a2g6fa62b)
 
-- implement contacting the author
+- :check: implement contacting the author
+- - a `mailto:`, but there's no accounts, so that's really all you get!
+- - .. guess I could make the UI a little clearer.. (?)
 - implement auto-emailing
 
 - implement matching lost and found items based off similar content in descriptions
+
+- fix the font sizes, they're a little all over the place (esp in the submission form)

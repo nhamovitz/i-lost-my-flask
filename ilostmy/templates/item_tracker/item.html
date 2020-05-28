@@ -20,22 +20,28 @@ item{% elif item['item_type'] == "found" %}found item{% endif %}){% endblock tit
     </div>
   </header>
   <div class="info">
-    <p class="item-type">Item type: {{ item['item_type'] }}</p>
-    <p class="item-info">
-      {% if item['item_type'] == "lost" %}Last seen{% elif item['item_type'] == "found" %}Found{% endif %}
-      {% if item['sighting_time'] %} on {{ pprint_iso_date(item['sighting_time']) }}{% endif %}
-      {% if item['place'] %} at {{ item['place'] }}{% endif %}.
-    </p>
+    <div class="basic-data">
+      <p id="item-type">Item type: {{ item['item_type'] }}</p>
+      <p>
+        {% if item['item_type'] == "lost" %}Last seen{% elif item['item_type'] == "found" %}Found{% endif %}
+        {% if item['sighting_time'] %} on {{ pprint_iso_date(item['sighting_time']) }}{% endif %}
+        {% if item['place'] %} at {{ item['place'] }}{% endif %}.
+      </p>
+      {% if item['resolved'] %}
+      <p>This item has been resolved. Hooray!</p>
+      {% endif %}
+    </div>
     {% if item['info'] %}
-    {{ item['info'] }}
-    {% endif %}</p>
+    <hr>Here's some more details about this item:
+    <p id="freeform-info">{{ item['info'] }}</p>
+    {% endif %}
   </div>
   {% if not item['resolved'] %}
+  <hr>
   <form action="{{ url_for('item_tracker.resolve', item_id=item['id']) }}" method="POST">
-    <label for="resolve">Mark resolved - {% if item['item_type'] == "lost" %}this item has been
-      found{% elif item['item_type'] == "found" %}this item has been returned to it's owner{% endif %}.</label>
-    <input type="submit" name="resolve" id="resolve" value="Mark resolved">
+    <input type="submit" name="resolve" id="resolve"
+      value="Mark resolved - {% if item['item_type'] == "lost" %}this item has been found{% elif item['item_type'] == "found" %}this item has been returned to its owner{% endif %}">
   </form>
-  {% else %}This item has been resolved. Hooray!{% endif %}
+  {% endif %}
 </article>
 {% endblock content %}
