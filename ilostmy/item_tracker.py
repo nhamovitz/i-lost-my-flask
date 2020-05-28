@@ -5,6 +5,8 @@ from werkzeug.exceptions import abort
 
 from ilostmy.db import get_db
 
+from ilostmy.util import pprint_iso_date
+
 bp = Blueprint('item_tracker', __name__)
 
 
@@ -53,6 +55,11 @@ def item_create():
         sighting_time = None
     if place == '':
         place = None
+
+    try:
+        pprint_iso_date(sighting_time)
+    except ValueError:
+        errors.append("Invalid sighting date")
 
     if errors != []:
         flash(' '.join(errors))

@@ -2,11 +2,7 @@ import os
 
 from flask import Flask
 
-from datetime import date
-
-
-def pprint_iso_date(datestring):
-    return date.fromisoformat(datestring).strftime('%m/%d/%y')
+from ilostmy.util import pprint_iso_date
 
 
 def create_app(test_config=None):
