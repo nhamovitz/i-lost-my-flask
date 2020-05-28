@@ -14,6 +14,7 @@ CREATE TABLE item (
   item_type TEXT NOT NULL,
   email TEXT NOT NULL,
   item_name TEXT NOT NULL,
+  resolved BOOLEAN NOT NULL,
   info TEXT,
   author TEXT,
   sighting_time TEXT,

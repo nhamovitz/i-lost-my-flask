@@ -59,8 +59,8 @@ def item_create():
     else:
         db = get_db()
         item_id = db.execute(
-            'INSERT INTO item (item_type, email, item_name, info, author, sighting_time, place) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            (item_type, email, item_name, info, author, sighting_time, place)
+            'INSERT INTO item (item_type, email, item_name, info, author, sighting_time, place, resolved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            (item_type, email, item_name, info, author, sighting_time, place, 0)
         ).lastrowid
         db.commit()
         # print(f"item_id: {item_id}")
