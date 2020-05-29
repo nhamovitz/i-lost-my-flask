@@ -87,7 +87,7 @@ Also I decided on Flask with Python rather than anything else (particularly also
 Was just typing out some todos and I realized the doc is kinda messy. Maybe I should start a trello board!
 ## Day 11
 Spent some time today organizing the github situation. I now only have one account! And I’m giving up on using ssh. I set up a Personal Access Token and am using that
-## Day, um 12? technically
+## Day 12
 Past-me left me with some fuckery around templating, so I had to fix that. I just stashed the changes and moved on.
 
 
