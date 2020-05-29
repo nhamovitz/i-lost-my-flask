@@ -24,3 +24,5 @@
   - validate that it's null if it's a 'lost' item and that it's present if it's a found item
   - insert `TEXT` into the database
   - deal with display somehow
+
+- add the wireframe sketches referenced in the project log as "(Fig 1)" to the repo
