@@ -14,12 +14,13 @@
 - implement auto-emailing
 
 - implement matching lost and found items based off similar content in descriptions
+  - when you resolve one, aggregate the list of all the other ones, from most-to-least likely to be the complement, and ask if you'd like to resolve any of those as well
 
 - fix the font sizes, they're a little all over the place (esp in the submission form)
 
 - (maybe) implement template inheritance - `import`, `include`, or `macro` - to replace the replication of the item 'preamble'
 
-- `current_loc` stuff (stashed under `current_loc`)
+- 'where is this particular found item?' stuff (stashed under `current_loc`)
   - add a required question just to the 'found' form
   - validate that it's null if it's a 'lost' item and that it's present if it's a found item
   - insert `TEXT` into the database
